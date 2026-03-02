@@ -15,6 +15,7 @@ def main(args):
         if lines:
             with open(args[2], mode="w") as target:
                 target.write("v3.0 hex words plain\n")
+                target.write("0000000000 ")
                 column = 0
                 for line in lines:
                     if column == 7:
@@ -37,7 +38,7 @@ def main(args):
                             target.write(f"{writen} ")
                             column += 1
                         case Opcode if Opcode in write_Op_set:
-                            RAddr = line.split()[1]
+                            WAddr = line.split()[1]
                             writen += hex(int(WAddr.strip("Rr,"))).strip("0x").rjust(10,"0")
                             target.write(f"{writen} ")
                             column += 1
