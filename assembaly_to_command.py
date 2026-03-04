@@ -26,27 +26,27 @@ def main(args):
                     writen = opcodes[opcode]
                     match writen:
                         case "1":
-                            write_address, data = line.split()[1:]
-                            writen += hex(int(write_address.strip("Rr,"))).strip("0x").rjust(2,"0")
-                            writen += hex(int(data)).strip("0x").rjust(8,"0")
+                            write_address, data = line.split()[1:3]
+                            writen += hex(int(write_address.strip("Rr,"))).lstrip("0x").rjust(2,"0")
+                            writen += hex(int(data)).lstrip("0x").rjust(8,"0")
                             target.write(f"{writen} ")
                             column += 1
                         case "2":
-                            WAddr, RAddr = line.split()[1:]
-                            writen += hex(int(WAddr.strip("Rr,"))).strip("0x").rjust(2,"0")
-                            writen += hex(int(RAddr.strip("Rr,"))).strip("0x").rjust(8,"0")
+                            WAddr, RAddr = line.split()[1:3]
+                            writen += hex(int(WAddr.strip("Rr,"))).lstrip("0x").rjust(2,"0")
+                            writen += hex(int(RAddr.strip("Rr,"))).lstrip("0x").rjust(8,"0")
                             target.write(f"{writen} ")
                             column += 1
                         case Opcode if Opcode in write_Op_set:
                             WAddr = line.split()[1]
-                            writen += hex(int(WAddr.strip("Rr,"))).strip("0x").rjust(10,"0")
+                            writen += hex(int(WAddr.strip("Rr,"))).lstrip("0x").rjust(10,"0")
                             target.write(f"{writen} ")
                             column += 1
                         case Opcode if Opcode in standard_Op_set:
                             WAddr, RAddr_A, RAddr_B = line.split()[1:]
-                            writen += hex(int(WAddr.strip("Rr,"))).strip("0x").rjust(2,"0")
-                            writen += hex(int(RAddr_B.strip("Rr,"))).strip("0x").rjust(6,"0")
-                            writen += hex(int(RAddr_A.strip("Rr,"))).strip("0x").rjust(2,"0")
+                            writen += hex(int(WAddr.strip("Rr,"))).lstrip("0x").rjust(2,"0")
+                            writen += hex(int(RAddr_B.strip("Rr,"))).lstrip("0x").rjust(6,"0")
+                            writen += hex(int(RAddr_A.strip("Rr,"))).lstrip("0x").rjust(2,"0")
                             target.write(f"{writen} ")
                             column += 1
 
